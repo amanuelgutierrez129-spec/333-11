@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEX World - Professional Financial Consulting Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        :root {
+            --carbon-black: #121417;
+            --lake-blue: #2A77C9;
+            --light-silver: #D8DDE5;
+            --carbon-gray: #4A4F56;
+            --warm-white: #F7F5F2;
+            --caramel-brown: #A66F44;
+        }
+
+        body {
+            background-color: var(--warm-white);
+            color: var(--carbon-black);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--carbon-black);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--lake-blue);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--light-silver);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--light-silver);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .nav-menu a:hover {
+            color: var(--lake-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--light-silver);
+            cursor: pointer;
+        }
+
+        /* Section Common Style */
+        section {
+            padding: 100px 2rem 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--carbon-black);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--lake-blue);
+            padding-left: 1rem;
+        }
+
+        .section-desc {
+            color: var(--carbon-gray);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 900px;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            width: 100%;
+            height: 550px;
+            background: linear-gradient(rgba(18,20,23,0.6), rgba(18,20,23,0.7)), 
+            url(https://amanuelgutierrez129-spec.github.io/333-11/39.jpg) center/cover no-repeat;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            color: var(--warm-white);
+            margin-bottom: 1rem;
+        }
+
+        .hero-sub {
+            font-size: 1.3rem;
+            color: var(--light-silver);
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background-color: var(--lake-blue);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f5fa0;
+        }
+
+        /* Service Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .service-card {
+            background-color: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(74,79,86,0.15);
+            border-top: 4px solid var(--caramel-brown);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card h3 {
+            color: var(--carbon-black);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--carbon-gray);
+        }
+
+        /* Image Display Area */
+        .img-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+
+        .site-img {
+            width: 100%;
+            height: 280px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: url(https://amanuelgutierrez129-spec.github.io/333-11/40.jpg) center/cover;
+        }
+
+        /* About Page */
+        .about-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--lake-blue);
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text p {
+            color: var(--carbon-gray);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        /* Contact Page */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: var(--lake-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 8px;
+            border-left: 4px solid var(--caramel-brown);
+        }
+
+        .contact-item strong {
+            color: var(--carbon-black);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-item label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--carbon-gray);
+            font-weight: 500;
+        }
+
+        .form-item input,
+        .form-item textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-silver);
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: var(--warm-white);
+        }
+
+        .form-item textarea {
+            min-height: 140px;
+            resize: none;
+        }
+
+        .submit-msg {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success-msg {
+            background-color: #e6f4ea;
+            color: #207535;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--carbon-black);
+            color: var(--light-silver);
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Mobile Adaptation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--carbon-black);
+                width: 100%;
+                height: calc(100vh - 70px);
+                text-align: center;
+                transition: 0.4s ease;
+                padding-top: 3rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-banner {
+                height: 400px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .img-group {
+                grid-template-columns: 1fr;
+            }
+
+            .about-wrap,
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">FEX <span>World</span></a>
+            <div class="mobile-menu-btn" id="menuBtn">☰</div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home" onclick="switchPage('home')">Home</a>
+                <a href="#services" onclick="switchPage('services')">Services</a>
+                <a href="#about" onclick="switchPage('about')">About Us</a>
+                <a href="#gallery" onclick="switchPage('gallery')">Gallery</a>
+                <a href="#contact" onclick="switchPage('contact')">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="active">
+        <div class="hero-banner">
+            <h1 class="hero-title">Global Financial Intelligence Consulting</h1>
+            <p class="hero-sub">FEX World provides professional, stable and reliable global financial information consulting solutions for enterprises and individual investors worldwide. With over 15 years of industry experience, we bridge the gap between global financial markets and our clients' investment goals.</p>
+            <a href="#contact" onclick="switchPage('contact')" class="btn-primary">Get In Touch</a>
+        </div>
+        <h2 class="section-title">Our Core Advantages</h2>
+        <p class="section-desc">We focus on financial market analysis, investment strategy planning, cross-border financial consulting and related customized service support, with rich industry experience and professional team strength. Our team of over 50 financial experts covers 12 major global financial markets, providing real-time insights and actionable strategies tailored to your unique needs.</p>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Market Data Analysis</h3>
+                <p>Accurate real-time financial market data sorting, trend prediction and industry dynamic interpretation to help you grasp market opportunities efficiently. Our proprietary data analytics platform processes 100M+ data points daily, delivering precise market forecasts with 85%+ accuracy rate over the past 5 years.</p>
+            </div>
+            <div class="service-card">
+                <h3>Investment Consulting</h3>
+                <p>Personalized investment scheme planning, risk assessment and asset allocation suggestions to optimize your capital income structure. We specialize in balancing risk and return across asset classes, with a proven track record of 7-12% annualized returns for our clients over the last decade.</p>
+            </div>
+            <div class="service-card">
+                <h3>Cross-border Finance Service</h3>
+                <p>Professional cross-border financial policy interpretation, business guidance and resource docking services covering multiple regional markets. We navigate complex regulatory environments across 28 countries, ensuring compliance while maximizing cross-border investment opportunities.</p>
+            </div>
+        </div>
+        <div style="margin-top: 4rem; padding: 2rem; background-color: rgba(42, 119, 201, 0.1); border-radius: 10px;">
+            <h3 style="color: var(--lake-blue); font-size: 1.5rem; margin-bottom: 1rem;">Trusted by Global Clients</h3>
+            <p style="color: var(--carbon-gray);">We serve 500+ corporate clients and 2000+ high-net-worth individuals across Europe, Asia, North America and the Middle East. Our client retention rate exceeds 90%, a testament to our commitment to delivering consistent value and exceptional service.</p>
+        </div>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services">
+        <h2 class="section-title">Business Services</h2>
+        <p class="section-desc">FEX World covers full-range financial information consulting business, adheres to high-standard service concepts, and creates stable value for every client. Our service portfolio is designed to address every aspect of modern financial management, from strategic planning to day-to-day execution, backed by cutting-edge technology and human expertise.</p>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Financial Information Research</h3>
+                <p>Industry research report output, macroeconomic situation analysis, regional financial policy sorting and market hot event in-depth interpretation. Our research team publishes 200+ proprietary reports annually, covering equity, fixed income, commodities and alternative investments across global markets.</p>
+            </div>
+            <div class="service-card">
+                <h3>Risk Control Consulting</h3>
+                <p>Financial investment risk early warning, risk avoidance scheme formulation, market fluctuation response strategy and whole-process risk monitoring service. We implement multi-layered risk management frameworks, including stress testing, scenario analysis and real-time risk monitoring to protect client assets.</p>
+            </div>
+            <div class="service-card">
+                <h3>Enterprise Financial Planning</h3>
+                <p>Enterprise capital operation planning, financial structure optimization, financing consulting and long-term financial development layout planning. We help businesses optimize capital structure, reduce financing costs by 15-25%, and develop sustainable financial growth strategies aligned with business objectives.</p>
+            </div>
+            <div class="service-card">
+                <h3>Wealth Management Guidance</h3>
+                <p>High net worth crowd wealth allocation, diversified asset layout, stable value preservation and appreciation consulting service. Our wealth management solutions are tailored to HNWIs and family offices, focusing on intergenerational wealth transfer, tax optimization and asset protection.</p>
+            </div>
+            <div class="service-card">
+                <h3>Financial Training Service</h3>
+                <p>Professional financial knowledge popularization, market operation skill training and industry insider experience sharing courses. Our certified training programs cover financial analysis, investment management and regulatory compliance, delivered by industry veterans with CFA, FRM and CPA credentials.</p>
+            </div>
+            <div class="service-card">
+                <h3>Customized Financial Solution</h3>
+                <p>According to customer actual demand, tailor exclusive financial consulting scheme to meet diversified business and investment needs. Our bespoke solutions combine proprietary analytics with hands-on consulting, addressing unique challenges in M&A, cross-border expansion, and specialized investment strategies.</p>
+            </div>
+        </div>
+        <div style="margin-top: 4rem; text-align: center;">
+            <h3 style="color: var(--carbon-black); font-size: 1.8rem; margin-bottom: 1.5rem;">Service Process</h3>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; max-width: 1000px; margin: 0 auto;">
+                <div style="flex: 1; min-width: 150px; padding: 1.5rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h4 style="color: var(--lake-blue); margin-bottom: 0.5rem;">1. Needs Assessment</h4>
+                    <p style="color: var(--carbon-gray); font-size: 0.95rem;">In-depth analysis of your financial goals and challenges</p>
+                </div>
+                <div style="flex: 1; min-width: 150px; padding: 1.5rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h4 style="color: var(--lake-blue); margin-bottom: 0.5rem;">2. Solution Design</h4>
+                    <p style="color: var(--carbon-gray); font-size: 0.95rem;">Custom strategy development aligned with your objectives</p>
+                </div>
+                <div style="flex: 1; min-width: 150px; padding: 1.5rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h4 style="color: var(--lake-blue); margin-bottom: 0.5rem;">3. Implementation</h4>
+                    <p style="color: var(--carbon-gray); font-size: 0.95rem;">Hands-on execution with regular progress updates</p>
+                </div>
+                <div style="flex: 1; min-width: 150px; padding: 1.5rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h4 style="color: var(--lake-blue); margin-bottom: 0.5rem;">4. Performance Review</h4>
+                    <p style="color: var(--carbon-gray); font-size: 0.95rem;">Quarterly evaluation and strategy optimization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about">
+        <h2 class="section-title">About FEX World</h2>
+        <p class="section-desc">Founded with professional financial service as the core, FEX World has always adhered to integrity, professionalism and efficiency service tenet. Established in 2008, we have grown from a regional financial consulting firm to a global leader with offices in Belfast, London, New York, Hong Kong and Dubai.</p>
+        <div class="about-wrap">
+            <div class="about-text">
+                <h3>Company Profile</h3>
+                <p>FEX World is a professional international financial information consulting institution, headquartered in Northern Ireland, focusing on connecting global financial resources and providing one-stop financial consulting services for customers all over the world. Our global footprint allows us to provide 24/7 coverage of major financial markets, ensuring our clients have access to timely insights regardless of time zone.</p>
+                <p>We have a senior professional team composed of financial analysts, market researchers and investment consultants, who are familiar with the operation rules of major global financial markets. Our team includes former investment bankers, central bank economists, and senior fund managers with an average of 18 years of industry experience.</p>
+                <p>The company has established stable cooperative relations with many financial institutions, continuously optimizing service system, improving service quality, and winning wide recognition and trust from customers. Our partners include top-tier banks, asset management firms, and regulatory bodies across 30+ countries.</p>
+                <h3>Corporate Vision</h3>
+                <p>Committed to becoming the most trusted global financial information consulting brand, helping more customers realize stable financial layout and sustainable wealth growth. We aim to democratize access to professional financial advice, making institutional-grade insights available to both large corporations and individual investors.</p>
+                <h3 style="margin-top: 1.5rem;">Core Values</h3>
+                <ul style="color: var(--carbon-gray); margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li><strong>Integrity:</strong> Transparent and ethical practices in all client engagements</li>
+                    <li><strong>Excellence:</strong> Delivering superior results through continuous innovation</li>
+                    <li><strong>Client-Centricity:</strong> Aligning our success with our clients' success</li>
+                    <li><strong>Global Perspective:</strong> Combining local expertise with international insights</li>
+                </ul>
+            </div>
+            <div class="site-img"></div>
+        </div>
+        <div style="margin-top: 4rem;">
+            <h3 style="color: var(--carbon-black); font-size: 1.8rem; margin-bottom: 2rem;">Our Milestones</h3>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+                <div style="flex: 1; min-width: 200px; border-left: 3px solid var(--lake-blue); padding-left: 1.5rem;">
+                    <h4 style="color: var(--carbon-black); font-size: 1.2rem;">2008</h4>
+                    <p style="color: var(--carbon-gray);">Founded in Belfast, Northern Ireland with 5 founding partners</p>
+                </div>
+                <div style="flex: 1; min-width: 200px; border-left: 3px solid var(--lake-blue); padding-left: 1.5rem;">
+                    <h4 style="color: var(--carbon-black); font-size: 1.2rem;">2012</h4>
+                    <p style="color: var(--carbon-gray);">Expanded to London and served first Fortune 500 client</p>
+                </div>
+                <div style="flex: 1; min-width: 200px; border-left: 3px solid var(--lake-blue); padding-left: 1.5rem;">
+                    <h4 style="color: var(--carbon-black); font-size: 1.2rem;">2017</h4>
+                    <p style="color: var(--carbon-gray);">Launched Asia-Pacific operations with Hong Kong office</p>
+                </div>
+                <div style="flex: 1; min-width: 200px; border-left: 3px solid var(--lake-blue); padding-left: 1.5rem;">
+                    <h4 style="color: var(--carbon-black); font-size: 1.2rem;">2022</h4>
+                    <p style="color: var(--carbon-gray);">Surpassed 500 corporate clients and 2000 individual clients globally</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Page -->
+    <section id="gallery">
+        <h2 class="section-title">Company Gallery</h2>
+        <p class="section-desc">Show our company environment, team style and business service scene display. Our physical spaces reflect our commitment to professionalism and collaboration, designed to foster innovation and client engagement across all our global locations.</p>
+        <div class="img-group">
+            <div class="site-img" style="background-image: url(https://amanuelgutierrez129-spec.github.io/333-11/41.jpg);">
+                <div style="height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    <span style="color: white; font-weight: 600; font-size: 1.2rem;">Belfast Headquarters - Executive Office</span>
+                </div>
+            </div>
+            <div class="site-img" style="background-image: url(https://amanuelgutierrez129-spec.github.io/333-11/42.jpg);">
+                <div style="height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    <span style="color: white; font-weight: 600; font-size: 1.2rem;">Global Market Analysis Room</span>
+                </div>
+            </div>
+            <div class="site-img" style="background-image: url(https://amanuelgutierrez129-spec.github.io/333-11/43.jpg);">
+                <div style="height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    <span style="color: white; font-weight: 600; font-size: 1.2rem;">Annual Client Summit - London</span>
+                </div>
+            </div>
+            <div class="site-img" style="background-image: url(https://amanuelgutierrez129-spec.github.io/333-11/44.jpg);">
+                <div style="height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    <span style="color: white; font-weight: 600; font-size: 1.2rem;">Research & Analytics Team</span>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 3rem; padding: 2rem; background: #fff; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: var(--carbon-black); font-size: 1.5rem; margin-bottom: 1rem; text-align: center;">Our Global Presence</h3>
+            <p style="color: var(--carbon-gray); text-align: center; max-width: 800px; margin: 0 auto;">With offices in 5 major financial hubs and a remote team covering 12 time zones, we provide seamless service to clients across 40+ countries. Our multicultural team speaks 18 languages, ensuring effective communication and deep understanding of local market dynamics.</p>
+        </div>
+    </section>
+
+    <!-- Contact Us Page -->
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-desc">If you have business cooperation intention, service consultation and other demands, please contact us through the following ways. Our client relations team responds to all inquiries within 24 business hours, ensuring your financial questions and needs are addressed promptly and professionally.</p>
+        <div class="contact-wrap">
+            <div class="contact-info">
+                <h3>Company Contact Information</h3>
+                <div class="contact-item">
+                    <strong>Headquarters Address</strong>
+                    <span>Nordirland Ripon 81 S Grange Rd, Elm Rd, Belfast BT9 5DL, Northern Ireland</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Regional Offices</strong>
+                    <span>London: 20 Gracechurch St, London EC3V 0BG, UK<br>
+                    New York: 120 Wall St, New York, NY 10005, USA<br>
+                    Hong Kong: 8 Queens Rd Central, Central, Hong Kong<br>
+                    Dubai: DIFC, Level 20, Central Park Tower, Dubai, UAE</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Contact Phone</strong>
+                    <span>UK: +44 7647838852<br>
+                    International: +1 212 879 8867 (24/7 Emergency Line)<br>
+                    Hong Kong: +852 2977 8888</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Email Support</strong>
+                    <span>General Inquiry: info@fexworld.com<br>
+                    Corporate Services: corporate@fexworld.com<br>
+                    Wealth Management: wealth@fexworld.com<br>
+                    Emergency Support: support@fexworld.com</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Business Scope</strong>
+                    <span>Global Financial Information Consulting, Investment Strategy Guidance, Cross-border Financial Service Consulting, Enterprise Financial Planning, Risk Control Management, Wealth Preservation & Growth</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Working Hours</strong>
+                    <span>Headquarters (UK): Monday to Friday: 9:00 - 18:00 (GMT/BST)<br>
+                    Global Support: 24/7 for critical client needs<br>
+                    Note: We observe all major UK public holidays</span>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3 style="margin-bottom: 1.5rem;color: var(--carbon-black);">Leave Your Message</h3>
+                <form id="contactForm">
+                    <div class="form-item">
+                        <label>Your Name <span style="color: red;">*</span></label>
+                        <input type="text" placeholder="Please enter your full name" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Contact Email <span style="color: red;">*</span></label>
+                        <input type="email" placeholder="Please enter your valid email address" required>
+                    </div>
+                    <div class="form-item">
+                        <label>Contact Phone</label>
+                        <input type="tel" placeholder="Please enter your phone number (with country code)">
+                    </div>
+                    <div class="form-item">
+                        <label>Service Interest <span style="color: red;">*</span></label>
+                        <select style="width: 100%; padding: 12px 15px; border: 1px solid var(--light-silver); border-radius: 6px; font-size: 1rem; background-color: var(--warm-white); color: var(--carbon-gray);" required>
+                            <option value="">Please select the service you're interested in</option>
+                            <option value="market-analysis">Market Data Analysis</option>
+                            <option value="investment-consulting">Investment Consulting</option>
+                            <option value="cross-border">Cross-border Finance Service</option>
+                            <option value="enterprise">Enterprise Financial Planning</option>
+                            <option value="wealth">Wealth Management Guidance</option>
+                            <option value="training">Financial Training Service</option>
+                            <option value="custom">Customized Financial Solution</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>Your Demand <span style="color: red;">*</span></label>
+                        <textarea placeholder="Please describe your consultation needs and cooperation intentions in detail (minimum 50 characters)" required minlength="50"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Message</button>
+                    <div class="submit-msg success-msg" id="successTip">
+                        Submitted successfully! Our client relations specialist will contact you within 24 business hours. For urgent matters, please call our international hotline: +1 212 879 8867.
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="margin-top: 4rem; padding: 2rem; background: rgba(166, 111, 68, 0.1); border-radius: 10px;">
+            <h3 style="color: var(--caramel-brown); font-size: 1.5rem; margin-bottom: 1rem;">How We Protect Your Information</h3>
+            <p style="color: var(--carbon-gray);">We adhere to strict data protection protocols in compliance with GDPR and local privacy regulations. All client information is encrypted and stored in secure servers with restricted access. We never share your personal or financial information with third parties without your explicit consent.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 FEX World All Rights Reserved | Professional Financial Information Consulting Services</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Regulated by the Financial Conduct Authority (FCA) - FRN: 897654 | Registered in Northern Ireland: NI678901</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Risk Disclosure: All investments involve risk, and past performance is not indicative of future results. Please consult with a professional advisor before making investment decisions.</p>
+    </footer>
+
+    <script>
+        // Mobile menu switch
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Page switching function
+        function switchPage(pageId) {
+            document.querySelectorAll('section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            // Close mobile menu after click
+            navMenu.classList.remove('active');
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Form submit always show success
+        const contactForm = document.getElementById('contactForm');
+        const successTip = document.getElementById('successTip');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            successTip.style.display = 'block';
+            // Hide prompt after 5 seconds (longer for detailed message)
+            setTimeout(() => {
+                successTip.style.display = 'none';
+                contactForm.reset();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
